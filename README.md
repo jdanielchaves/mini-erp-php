@@ -27,5 +27,7 @@ Abra o navegador e acesse http://localhost/seuprojeto/index.php.
 Navegue pelas páginas para gerenciar produtos, cupons e pedidos.
 
 Contato
+
 Daniel Carlos Chaves dos Santos
+
 Email: daniiel.carlos.2008@gmail.com
