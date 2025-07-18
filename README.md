@@ -1,5 +1,5 @@
 Mini ERP - Controle de Pedidos, Produtos, Cupons e Estoque
-Descrição
+
 Este projeto é um mini sistema ERP desenvolvido em PHP com banco de dados MySQL para controle simples de produtos, cupons e pedidos. 
 
 Inclui:
