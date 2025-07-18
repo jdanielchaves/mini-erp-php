@@ -17,9 +17,13 @@ Como Rodar o Projeto
 
 Clone este repositório ou baixe os arquivos.
 Configure um servidor local.
+
 Crie o banco de dados e as tabelas executando o script SQL disponível em db.sql
+
 Configure o arquivo db.php com suas credenciais do banco
+
 Abra o navegador e acesse http://localhost/seuprojeto/index.php.
+
 Navegue pelas páginas para gerenciar produtos, cupons e pedidos.
 
 Contato
