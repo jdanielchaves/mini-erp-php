@@ -9,7 +9,7 @@ $sql = "SELECT * FROM produtos WHERE estoque > 0 ORDER BY nome";
 $stmt = $pdo->query($sql);
 $produtos = $stmt->fetchAll();
 
-// Buscar cupons para validação (mas não exibiremos a lista, só para validar)
+// Buscar cupons para validação 
 $sqlCupons = "SELECT * FROM cupons WHERE ativo = 1 AND validade >= CURDATE()";
 $stmtCupons = $pdo->query($sqlCupons);
 $cuponsValidos = $stmtCupons->fetchAll(PDO::FETCH_UNIQUE);
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['criar_pedido'])) {
             if (!$produto) continue;
             if ($produto['estoque'] < $quantidade) {
                 $erro = "Estoque insuficiente para o produto: " . htmlspecialchars($produto['nome']);
-                break; // Corrigido: apenas 1 nível de break
+                break; 
             }
 
             $subtotal = $produto['preco'] * $quantidade;
@@ -71,14 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['criar_pedido'])) {
                 $erro = "Cupom inválido, inativo ou expirado.";
             } else {
                 $cupomId = $cupom['id'];
-                // Aqui vamos supor que desconto é percentual (%)
                 $desconto = $cupom['desconto'];
                 $valorTotal = $valorTotal * ((100 - $desconto) / 100);
             }
         }
 
         if (!$erro) {
-            // Inserir pedido
             $sqlPedido = "INSERT INTO pedidos (cliente_nome, valor_total, cupom_id, status) VALUES (:cliente, :valor_total, :cupom_id, 'pendente')";
             $stmtPedido = $pdo->prepare($sqlPedido);
             $stmtPedido->execute([
@@ -88,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['criar_pedido'])) {
             ]);
             $pedidoId = $pdo->lastInsertId();
 
-            // Inserir itens do pedido e atualizar estoque
             $sqlItem = "INSERT INTO pedido_itens (pedido_id, produto_id, quantidade, preco_unitario, subtotal) VALUES (:pedido_id, :produto_id, :quantidade, :preco_unitario, :subtotal)";
             $sqlEstoque = "UPDATE produtos SET estoque = estoque - :quantidade WHERE id = :produto_id";
 
